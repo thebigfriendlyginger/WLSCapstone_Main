@@ -1,0 +1,42 @@
+<ui-view>
+    <div>
+        <button type="button" class="btn btn-link"
+                ui-sref="wombat.nav.accidents.create">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create Accident
+        </button>
+    </div>
+</ui-view>
+<hr/>
+<table>
+    <tr>
+        <th>Edit</th>
+        <th>Employee ID</th>
+        <th>Accident Date</th>
+    </tr>
+    <tr ng-repeat="accident in accidentsCtrl.accidents">
+        <td>
+            <button type="button"
+                    class="btn btn-link"
+                    ui-sref="wombat.nav.accidents.edit({accidentId:accident.id})">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+
+        </td>
+        <td>
+            <a>
+                {{ accident.EmployeeID }}
+            </a>
+        </td>
+        <td>
+            {{ accident.AccidentDate }}
+        </td>
+        <td>
+            <button type="button"
+                    class="close"
+                    ng-click="accidentsCtrl.deleteAccident(accident);">
+                &times;
+            </button>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,45 @@
+<ui-view>
+    <div>
+        <button type="button" class="btn btn-link"
+                ui-sref="wombat.nav.claims.create">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create Claim
+        </button>
+    </div>
+</ui-view>
+<hr/>
+<table>
+    <tr>
+        <th>Edit</th>
+        <th>Accident ID</th>
+        <th>Claim Date</th>
+        <th>Claim Cost</th>
+    </tr>
+    <tr ng-repeat="claim in claimsCtrl.claims">
+        <td>
+            <button type="button"
+                    class="btn btn-link"
+                    ui-sref="wombat.nav.claims.edit({claimId:claim.id})">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </td>
+        <td>
+            <p>
+                {{ claim.AccidentID }}
+            </p>
+        </td>
+        <td>
+            {{ claim.ClaimDate }}
+        </td>
+        <td>
+            {{ '$ ' + claim.ClaimAmount }}
+        </td>
+        <td>
+            <button type="button"
+                    class="close"
+                    ng-click="claimsCtrl.deleteClaim(claim);">
+                &times;
+            </button>
+        </td>
+    </tr>
+</table>

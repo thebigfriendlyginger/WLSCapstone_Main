@@ -1,0 +1,62 @@
+<form class="edit-form" name="accidentEditForm" role="form" ng-submit="editAccidentCtrl.updateAccident(editedAccident)" novalidate>
+    <div class="form-group">
+        <label for="editedAccidentEmployeeID">Select Employee:
+            <span style="color:red" class="error" ng-show="accidentEditForm.editedAccidentEmployeeID.$error.required">
+                Required!
+            </span>
+        </label>
+        <select class="form-control" name="editedAccidentEmployeeID" required
+                id="editedAccidentEmployeeID"
+                ng-model="editAccidentCtrl.editedAccident.EmployeeID"
+                ng-options="employee.id as (employee.LastName + ', ' + employee.FirstName) for employee in editAccidentCtrl.employees">
+            <option value="">select an Employee</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="editedAccidentDate">Accident Date:
+            <span style="color:red" class="error" ng-show="accidentEditForm.editedAccidentDate.$error.required">
+                Required!
+            </span>
+            <span style="color:red" class="error" ng-show="accidentEditForm.editedAccidentDate.$error.date">
+                Not a valid date!
+            </span>
+        </label>
+        <input type="text" class="form-control"
+               id="editedAccidentDate" ng-model="editAccidentCtrl.editedAccident.AccidentDate"
+               placeholder="yyyy-MM-dd" min="1970-01-01" max="2017-03-31" required>
+    </div>
+    <div class="form-group">
+        <label for="editedAccidentDescription">Accident Description: </label>
+        <input type="text" class="form-control"
+               id="editedAccidentDescription"
+               ng-model="editAccidentCtrl.editedAccident.AccidentDescription"
+               placeholder="Enter Accident Description" maxlength="255">
+    </div>
+    <div class="form-group">
+        <label for="editedAccidentState">Accident State</label>
+        <select class="form-control"
+                id="editedAccidentState"
+                ng-model="editAccidentCtrl.editedAccident.AccidentState"
+                ng-options="usstate.StateAbb as usstate.StateName for usstate in editAccidentCtrl.usstates">
+            <option value="">No State</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="editedAccidentCountry">Country:
+            <span style="color:red" class="error" ng-show="accidentEditForm.editedAccidentCountry.$error.required">
+                Required!
+            </span>
+        </label>
+        <select class="form-control" name="editedAccidentCountry" required
+                id="editedAccidentCountry"
+                ng-model="editAccidentCtrl.editedAccident.AccidentCountry"
+                ng-options="country.CountryAbb as country.CountryName for country in editAccidentCtrl.countries">
+            <option value="">select a Country</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-info btn-lg"
+            ng-disabled="accidentEditForm.$invalid">Edit</button>
+    <button type="button" class="btn btn-default btn-lg pull-right" ng-click="editAccidentCtrl.cancelEditing()">
+        Cancel
+    </button>
+</form>

@@ -1,0 +1,75 @@
+<form class="edit-form" name="claimEditForm" role="form" ng-submit="editClaimCtrl.updateClaim(editedClaim)" novalidate>
+    <div class="form-group">
+        <label for="editedClaimAccidentID">Select Accident:
+            <span style="color:red" class="error" ng-show="claimEditForm.editedClaimAccidentID.$error.required">
+                Required!
+            </span>
+        </label>
+        <select class="form-control" name="editedClaimAccidentID" required
+                id="editedClaimAccidentID"
+                ng-model="editClaimCtrl.editedClaim.AccidentID"
+                ng-options="accident.id as accident.id for accident in editClaimCtrl.accidents">
+            <option value="">select an Accident</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="editedClaimDate">Claim Date:
+            <span style="color:red" class="error" ng-show="claimEditForm.editedClaimDate.$error.required">
+                Required!
+            </span>
+            <span style="color:red" class="error" ng-show="claimEditForm.editedClaimDate.$error.date">
+                Not a valid date!
+            </span>
+        </label>
+        <input type="text" class="form-control"
+               id="editedClaimDate" ng-model="editClaimCtrl.editedClaim.ClaimDate"
+               placeholder="yyyy-MM-dd" min="1970-01-01" max="2017-03-31" required>
+    </div>
+    <div class="form-group">
+        <label for="editedClaimDescription">Claim Description: </label>
+        <input type="text" class="form-control"
+               id="editedClaimDescription"
+               ng-model="editClaimCtrl.editedClaim.ClaimDescription"
+               placeholder="Enter Claim Description" maxlength="255">
+    </div>
+    <div class="form-group">
+        <label for="editedClaimState">Claim State</label>
+        <select class="form-control"
+                id="editedClaimState"
+                ng-model="editClaimCtrl.editedClaim.ClaimState"
+                ng-options="usstate.StateAbb as usstate.StateName for usstate in editClaimCtrl.usstates">
+            <option value="">No State</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="editedClaimCountry">Country:
+            <span style="color:red" class="error" ng-show="claimEditForm.editedClaimCountry.$error.required">
+                Required!
+            </span>
+        </label>
+        <select class="form-control" name="editedClaimCountry" required
+                id="editedClaimCountry"
+                ng-model="editClaimCtrl.editedClaim.ClaimCountry"
+                ng-options="country.CountryAbb as country.CountryName for country in editClaimCtrl.countries">
+            <option value="">select a Country</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="editedClaimAmount">Amount:
+            <span style="color:red" class="error" ng-show="claimEditForm.editedClaimAmount.$error.required">
+                Required!
+            </span>
+            <span style="color:red" class="error" ng-show="claimEditForm.editedClaimAmount.$error.number">
+                Not a valid number!
+            </span>
+        </label>
+        <input type="number" class="form-control" name="editedClaimAmount"
+               id="editedClaimAmount" ng-model="editClaimCtrl.editedClaim.ClaimAmount"
+               placeholder="Enter Amount" maxlength="20" pattern="^\d+(\.\d{1,2})?$" required>
+    </div>
+    <button type="submit" class="btn btn-info btn-lg"
+            ng-disabled="claimEditForm.$invalid">Edit</button>
+    <button type="button" class="btn btn-default btn-lg pull-right" ng-click="editClaimCtrl.cancelEditing()">
+        Cancel
+    </button>
+</form>

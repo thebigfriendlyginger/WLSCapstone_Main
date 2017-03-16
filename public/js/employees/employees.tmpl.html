@@ -1,0 +1,42 @@
+<ui-view>
+    <div>
+        <button type="button" class="btn btn-link"
+                ui-sref="wombat.nav.employees.create">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create Employee
+        </button>
+    </div>
+</ui-view>
+<hr/>
+<table>
+    <tr>
+        <th>Edit</th>
+        <th>Name</th>
+        <th>Salary</th>
+    </tr>
+    <!--Think of this like a forEach loop. It's going to repeat everything from tr to /tr for each employee.-->
+    <tr ng-repeat="employee in employeesCtrl.employees">
+        <td>
+            <button type="button"
+                    class="btn btn-link"
+                    ui-sref="wombat.nav.employees.edit({employeeId:employee.id})">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </td>
+        <td>
+            <a> <!--You can run functions in the DOM or in the controllers. The key to rendering angular is the double brackets-->
+                {{ employee.LastName + ', ' + employee.FirstName }}
+            </a>
+        </td>
+        <td>
+            {{'$ ' + employee.Salary}}
+        </td>
+        <td>
+            <button type="button"
+                    class="close"
+                    ng-click="employeesCtrl.deleteEmployee(employee);">
+                &times;
+            </button>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,75 @@
+<form class="create-form" name="claimCreateForm" role="form" ng-submit="createClaimCtrl.createClaim(newClaim)" novalidate>
+    <div class="form-group">
+        <label for="newClaimAccidentID">Select Accident:
+            <span style="color:red" class="error" ng-show="claimCreateForm.newClaimAccidentID.$touched && claimCreateForm.newClaimAccidentID.$error.required">
+                Required!
+            </span>
+        </label>
+        <select class="form-control" name="newClaimAccidentID" required
+                id="newClaimAccidentID"
+                ng-model="createClaimCtrl.newClaim.AccidentID"
+                ng-options="accident.id as accident.id for accident in createClaimCtrl.accidents">
+            <option value="">select an Accident</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="newClaimDate">Claim Date:
+            <span style="color:red" class="error" ng-show="claimCreateForm.newClaimDate.$touched && claimCreateForm.newClaimDate.$error.required">
+                Required!
+            </span>
+            <span style="color:red" class="error" ng-show="claimCreateForm.newClaimDate.$touched && claimCreateForm.newClaimDate.$error.date">
+                Not a valid date!
+            </span>
+        </label>
+        <input type="text" class="form-control"
+               id="newClaimDate" ng-model="createClaimCtrl.newClaim.ClaimDate"
+               placeholder="yyyy-MM-dd" min="1970-01-01" max="2017-03-31" required>
+    </div>
+    <div class="form-group">
+        <label for="newClaimDescription">Claim Description: </label>
+        <input type="text" class="form-control"
+               id="newClaimDescription"
+               ng-model="createClaimCtrl.newClaim.ClaimDescription"
+               placeholder="Enter Claim Description" maxlength="255">
+    </div>
+    <div class="form-group">
+        <label for="newClaimState">Claim State</label>
+        <select class="form-control"
+                id="newClaimState"
+                ng-model="createClaimCtrl.newClaim.ClaimState"
+                ng-options="usstate.StateAbb as usstate.StateName for usstate in createClaimCtrl.usstates">
+            <option value="">No State</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="newClaimCountry">Country:
+            <span style="color:red" class="error" ng-show="claimCreateForm.newClaimCountry.$touched && claimCreateForm.newClaimCountry.$error.required">
+                Required!
+            </span>
+        </label>
+        <select class="form-control" name="newClaimCountry" required
+                id="newClaimCountry"
+                ng-model="createClaimCtrl.newClaim.ClaimCountry"
+                ng-options="country.CountryAbb as country.CountryName for country in createClaimCtrl.countries">
+            <option value="">select a Country</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="newClaimAmount">Amount:
+            <span style="color:red" class="error" ng-show="claimCreateForm.newClaimAmount.$touched && claimCreateForm.newClaimAmount.$error.required">
+                Required!
+            </span>
+            <span style="color:red" class="error" ng-show="claimCreateForm.newClaimAmount.$touched && claimCreateForm.newClaimAmount.$error.number">
+                Not a valid number!
+            </span>
+        </label>
+        <input type="number" class="form-control" name="newClaimAmount"
+               id="newClaimAmount" ng-model="createClaimCtrl.newClaim.Amount"
+               placeholder="Enter Amount" maxlength="20" pattern="^\d+(\.\d{1,2})?$" required>
+    </div>
+    <button type="submit" class="btn btn-info btn-lg"
+            ng-disabled="claimCreateForm.$invalid">Create</button>
+    <button type="button" class="btn btn-default btn-lg pull-right" ng-click="createClaimCtrl.cancelCreating()">
+        Cancel
+    </button>
+</form>
